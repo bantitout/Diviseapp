@@ -5,6 +5,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @pagy, @posts = pagy(Post.all.order(created_at: :desc), items: 10)
+    @post = Post.new
     @posts = Post.all
   end
 
