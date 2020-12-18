@@ -1,0 +1,4 @@
+alert("user sucessfull created")
+$("#modal-window").modal('hide');   
+$("#posts").prepend('<%= j render(@post)%></tr>');
+$(":input:not(input[type=submit])").val("");

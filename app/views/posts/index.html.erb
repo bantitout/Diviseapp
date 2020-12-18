@@ -2,13 +2,9 @@
 
 <h1>Posts</h1>
 
-<% if user_signed_in? %>
-  
-  <%= link_to 'New Post',"#" ,{'data-toggle' =>  "modal", 'data-target' => '#modal-window',class: "btn btn-primary"}  %><br>
 
-<% end %> <br>
 
-<table class = "table-bordered w-100 text-center font-weight-bold thead-dark" >
+<table class = "table-bordered w-100 text-center font-weight-bold thead-dark" id = "posts" >
   <thead class="thead-dark">
     <tr>
       <th>Titel</th>
@@ -24,7 +20,7 @@
         <td><%= post.body %></td>
         <td><%= link_to 'Show', post ,class: "btn btn-info text-white" %></td>
         <% if user_signed_in? %>
-        <td><%= link_to 'Edit', "#" ,{'data-toggle' =>  "modal", 'data-target' => "#post_#{post.id}",class: "btn btn-danger text-white"}    %></td>
+        <td><%= link_to 'Edit', "#" ,{'data-toggle' =>  "modal", 'data-target' => "#post_#{post.id}",class: "btn btn-danger text-white"}    %>
         
           <div class="modal fade" id= "post_<%=post.id%>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
               <div class="modal-dialog" role="document">
@@ -40,11 +36,11 @@
                   </div>
                 </div>
               </div>
-</div>
+          </div>
+        </td>
 
 
-
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' },class: "btn btn-primary text-white" %></td>
+        <td><%= link_to 'Destroy', post, method: :delete,remote: true, data: { confirm: 'Are you sure?' },id: "post_#{ @post.id}" ,class: "btn btn-primary text-white" %></td>
         <% end %>
       </tr>
     <% end %>
@@ -52,7 +48,15 @@
 </table>
 <%= render partial: 'shared/pagination', locals: { pagy: @pagy }%>
 
+
 <br>
+
+
+<% if user_signed_in? %>
+  
+  <%= link_to 'New Post',"#" ,{'data-toggle' =>  "modal", 'data-target' => '#modal-window',class: "btn btn-primary"}  %><br>
+
+<% end %> <br>
 
 <div class="modal fade" id="modal-window" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">

@@ -1,5 +1,5 @@
 
-<%= form_with(model: post, local: true) do |form| %>
+<%= form_with(model: post, remote: true) do |form| %>
   <div class="field form-group">
     <%= form.label :titel ,class: "text-info"%>
     <%= form.text_field :titel,class: "form-control" %>
